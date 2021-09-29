@@ -37,7 +37,7 @@ app.get("/users", (req: Request, res: Response) => {
 
 app.get("/users/:id", (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id);
-  const user = db.users.find((element) => element.id === id); // võtabe db users massiivi, võtame iga elemendi ja vaatame kas selle elemendi id on võrdne mis saama ja kui on siis tagastab leitud
+  const user = db.users.find((element) => element.id === id); // võtab db users massiivi, võtame iga elemendi ja vaatame kas selle elemendi id on võrdne mis saama ja kui on siis tagastab leitud
   res.status(ok).json({
     user,
   });
