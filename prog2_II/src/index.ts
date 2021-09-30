@@ -23,6 +23,7 @@ import usersController from './components/users/controller';
 
 import responseCodes from './components/general/responseCodes';
 import { port } from './components/general/settings';
+import logger from './components/general/loggerMiddleware';
 /**
  * Create express app
  */
@@ -36,6 +37,8 @@ app.use(express.json());
  * Register CORS middleware
  */
 app.use(cors());
+
+app.use(logger);
 /**
  * Register API documentation middleware
  */
@@ -68,91 +71,12 @@ app.get('/ping', (req: Request, res: Response) => {
 
 /**
  * *********************** Users ******************
- * Get all users
  */
 app.get('/users', usersController.getAllUsers);
-
-/**
- * Get user by id
- */
 app.get('/users/:id', usersController.getUserById);
-
-/**
- * Remove user by id
- */
-app.delete('/users/:id', (req: Request, res: Response) => {
-  const id: number = parseInt(req.params.id, 10);
-  if (!id) {
-    return res.status(responseCodes.badRequest).json({
-      error: 'No valid id provided',
-    });
-  }
-  const index = db.users.findIndex((element) => element.id === id);
-  if (index < 0) {
-    return res.status(responseCodes.badRequest).json({
-      message: `User not found with id: ${id}`,
-    });
-  }
-  db.users.splice(index, 1);
-  return res.status(responseCodes.noContent).json({});
-});
-
-/**
- * Create user
- */
-app.post('/users', (req: Request, res: Response) => {
-  const { firstName, lastName } = req.body;
-  if (!firstName) {
-    return res.status(responseCodes.badRequest).json({
-      error: 'First name is required',
-    });
-  }
-  if (!lastName) {
-    return res.status(responseCodes.badRequest).json({
-      error: 'Last name is required',
-    });
-  }
-  const id = db.users.length + 1;
-  db.users.push({
-    id,
-    firstName,
-    lastName,
-  });
-  return res.status(responseCodes.created).json({
-    id,
-  });
-});
-
-/**
- * Update user
- */
-app.patch('/users/:id', (req: Request, res: Response) => {
-  const id: number = parseInt(req.params.id, 10);
-  const { firstName, lastName } = req.body;
-  if (!id) {
-    return res.status(responseCodes.badRequest).json({
-      error: 'No valid id provided',
-    });
-  }
-  if (!firstName && !lastName) {
-    return res.status(responseCodes.badRequest).json({
-      error: 'Nothing to update',
-    });
-  }
-  const index = db.users.findIndex((element) => element.id === id);
-  if (index < 0) {
-    return res.status(responseCodes.badRequest).json({
-      error: `No user found with id: ${id}`,
-    });
-  }
-  if (firstName) {
-    db.users[index].firstName = firstName;
-  }
-  if (lastName) {
-    db.users[index].lastName = lastName;
-  }
-  return res.status(responseCodes.noContent).json({});
-});
+app.delete('/users/:id', usersController.removeUser);
+app.post('/users', usersController.createUser);
+app.patch('/users/:id', usersController.updateUser);
 
 /**
  * *********************** Categories ******************

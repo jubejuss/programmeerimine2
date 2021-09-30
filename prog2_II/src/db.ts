@@ -1,11 +1,4 @@
-/**
- * User interface
- */
-interface User {
-    id: number;
-    firstName: string;
-    lastName: string;
-}
+import User from './components/users/interfaces';
 
 /**
  * Category interface

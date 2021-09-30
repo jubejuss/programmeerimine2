@@ -65,4 +65,30 @@ Otsing ./ nt, et otsi samast katyaloogist, kus ise asud. Pannakse see ette, sest
 export default ekspordib kõik  
 
 ### Praktiline osa
-src kataloogi teha folder components. Users controller
+* src kataloogi teha folder components. Users controller
+*  Import Cors (needed because of API documentation in this project)
+ What is CORS?: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+
+import cors from 'cors';
+  
+### Moodulid
+et poleks pikk kood
+### Struktureerim ine
+et kuhu paned koodijupid
+
+### Mis on Middleware
+Eesmärk - kui näiteks pole vastust või midagi ei sobi vms.  
+Sest kui me kirjutaks otse nt kontrollerisse, läheks asi liiga pikaks.
+Vaata, tegime loggerMiddleware.ts faili generali alla.  
+next argument - so func, mille expressi app paneb kaasa ja mis tuleb käivitada kui muud asjad on tehtud  
+
+
+
+### Mida me tegime
+Me võtsime algse ts failis oleva töö ja jaotasime ta vastavalt funktsioonidele erinevate nö mottorite alla.
+
+### Kodune töö
+* Struktureerimine teha kõikide ressurssidega. Praegu tegime vaid usersitega. Aga seda peaks tegema enda rakendustega.
+* Kasutada vähemalt ühte Middlewaret. Nt firstName, LastName kontroll.
+* API doku. Kasvõi Readme (vt moodle). Et selgitada kellelegi, mida see api teeb, mis andmed liiguvad, mis endpointid on.
+* Proovi ka seda frontendi pisikest äppi
