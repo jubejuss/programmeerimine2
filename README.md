@@ -33,8 +33,9 @@ Ekspress tegeleb http meetoditega
 vt [express](expressjs.com) lehelt ka juhendeid  
  npm install --save-dev @types/express 
 
-## Tagasiside esimesele kodutööle
-### mis võiks olla
+## Teine loeng
+### Tagasiside esimesele kodutööle
+#### mis võiks olla
 * aruanne, kirjeldus, kuidas ma midagi tegin, mis mul peas oli, mis olid probleemid.
 * Minul jäi puudu see, et kuidas need endpointid omavahel siduda
 * ma tegelikult ei saanud aru, kuhu liikuda, et kas piisab sellest, mis me tunnis tegime või vaja midagi rohkemat.
@@ -42,4 +43,12 @@ vt [express](expressjs.com) lehelt ka juhendeid
 
 * Kood - vaatad kaks kuud hiljem ja enam aru ei saa miks ja mida tegid.
 * openAPI Swagger - dokumentatsiooni tegemiseks. Järgmisel korral peaks omna tööd, apit dokumenteerima
+* Oleks vaja olnud lihtsalt kõike, mida on võimalik kätte saada. Sellega ma panin võssa    
+  
 
+
+### Loeng ise
+Endpointi sisse topid kõik need ühe kategooria asjad - get, post, put, delete  
+Teise loengu kaustas on ka **example_app**  
+
+### controllers
