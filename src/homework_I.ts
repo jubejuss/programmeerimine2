@@ -19,19 +19,72 @@ const db = {
       volume: 4,
     },
   ],
+
+  group: [
+    {
+      id: 1,
+      name: "RIF I",
+    },
+    {
+      id: 2,
+      name: "RIF II",
+    },
+    {
+      id: 2,
+      name: "RIF III",
+    },
+  ],
+
+  lecturer: [
+    {
+      id: 1,
+      name: "Martti Raavel",
+    },
+    {
+      id: 2,
+      name: "Laura Hein",
+    },
+  ],
+
+  event: [
+    {
+      id: 1,
+      name: "Programmeerimine II",
+      startDate: 11.21,
+      endDate: 11.21,
+    },
+    {
+      id: 2,
+      name: "Disaini alused",
+      startDate: 11.21,
+      endDate: 11.21,
+    },
+  ],
+
+  room: [
+    {
+      id: 1,
+      name: 201,
+    },
+    {
+      id: 2,
+      name: 202,
+    },
+  ],
+
 };
 
-app.get("/users", (req: Request, res: Response) => {
+app.get("/rooms", (req: Request, res: Response) => {
   res.status(ok).json({
     users: db.schoolSubject,
   });
 });
 
-app.get("/users/:id", (req: Request, res: Response) => {
+app.get("/rooms/:id", (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id);
-  const user = db.schoolSubject.find((element) => element.id === id);
+  const room = db.schoolSubject.find((element) => element.id === id);
   res.status(ok).json({
-    user,
+    room,
   });
 });
 
