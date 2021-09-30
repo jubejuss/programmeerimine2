@@ -1,4 +1,4 @@
-# Programmeerimine II
+# Prog II
 ## Api
 Api on liides, mille kaudu süsteemid **saavad infot omavahel jagada**. Nt Front-end <-> Backend.  
 CRUD Api:  
@@ -51,4 +51,18 @@ vt [express](expressjs.com) lehelt ka juhendeid
 Endpointi sisse topid kõik need ühe kategooria asjad - get, post, put, delete  
 Teise loengu kaustas on ka **example_app**  
 
-### controllers
+### Struktuur
+* routes
+* controllers
+* services
+* helpers
+* middleware
+
+### Modules
+nt myModule.ts  
+Eksportimine  
+Otsing ./ nt, et otsi samast katyaloogist, kus ise asud. Pannakse see ette, sest ilma milletagi, otsitakse automaatselt Node_modules kaustast.  
+export default ekspordib kõik  
+
+### Praktiline osa
+src kataloogi teha folder components. Users controller
