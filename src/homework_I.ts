@@ -73,7 +73,8 @@ const db = {
   ],
 
 };
-
+//alljärgnevat erinevate andmebaasi osadega kopeerides saaksin kätte andmebaasi erinevad sisud, 
+//kuid siin oleks vaja ka need omavahel siduda
 app.get("/rooms", (req: Request, res: Response) => {
   res.status(ok).json({
     users: db.schoolSubject,
