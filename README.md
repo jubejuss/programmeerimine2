@@ -91,4 +91,4 @@ Me võtsime algse ts failis oleva töö ja jaotasime ta vastavalt funktsioonidel
 * Struktureerimine teha kõikide ressurssidega. Praegu tegime vaid usersitega. Aga seda peaks tegema enda rakendustega.
 * Kasutada vähemalt ühte Middlewaret. Nt firstName, LastName kontroll.
 * API doku. Kasvõi Readme (vt moodle). Et selgitada kellelegi, mida see api teeb, mis andmed liiguvad, mis endpointid on.
-* Proovi ka seda frontendi pisikest äppi
+* Proovi ka seda frontendi pisikest äppi  
