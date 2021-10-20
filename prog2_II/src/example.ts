@@ -1,15 +1,15 @@
 const myFunction = (value: number): number => {
-    const sum = value + 10;
-    return sum;
+  const sum = value + 10;
+  return sum;
 };
 
 const myObject = {
-    myFunction,
+  myFunction,
 };
 
 const person = {
-    firstName: 'Martti',
-    lastName: 'Raavel',
+  firstName: 'Martti',
+  lastName: 'Raavel',
 };
 const variable3: number;
 
