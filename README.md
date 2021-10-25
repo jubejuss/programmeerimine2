@@ -118,3 +118,11 @@ export import
 - Kasutada vähemalt ühte Middlewaret. Nt firstName, LastName kontroll.
 - API doku. Kasvõi Readme (vt moodle). Et selgitada kellelegi, mida see api teeb, mis andmed liiguvad, mis endpointid on.
 - Proovi ka seda frontendi pisikest äppi
+
+## vahelobisemised
+
+Praktika, kokku 30 kohapeal ja 230 tundi iseseisvalt
+st ca 230/4 kuud, ehk ca 60h kuus ehk 60/4 ehk ca 15h nädalas, ehk 3h tööpäevas
+Javascripti mängud
+
+API axios
