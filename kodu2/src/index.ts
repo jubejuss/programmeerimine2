@@ -7,9 +7,14 @@ import randomServicesController from './components/randomService/controller';
 
 import { port } from './components/general/settings';
 
+// middleware 
+import logger from './components/general/loggerMiddleware';
+
 const app: Application = express();
 app.use(express.json());
 app.use(cors());
+// register middleware
+app.use(logger);
 
 app.get('/users', usersController.getAllUsers);
 app.get('/users/:id', usersController.getUserById);
