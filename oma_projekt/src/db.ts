@@ -37,7 +37,7 @@ interface Excuse {
  */
 interface Db {
   users: User[];
-  teenused: Teenus[];
+  teenused: teenus[];
   excuses: Excuse[];
 }
 
@@ -60,56 +60,6 @@ const db: Db = {
       email: 'ester@ester.ee',
       phone: 5102922,
       IBAN: 'EE642200221020661839',
-    },
-  ],
-  // enne Categories
-  teenused: [
-    {
-      id: 1,
-      name: 'Koolitööd',
-      createdBy: 1,
-    },
-    {
-      id: 2,
-      name: 'Kodu',
-      createdBy: 2,
-    },
-  ],
-  excuses: [
-    {
-      id: 1,
-      description: 'Ei viitsinud teha',
-      category: 1,
-      createdBy: 1,
-      visibility: 'Public',
-    },
-    {
-      id: 2,
-      description: 'Ei tahtnud teha',
-      category: 1,
-      createdBy: 1,
-      visibility: 'Public',
-    },
-    {
-      id: 3,
-      description: 'Ei jõudnud teha',
-      category: 1,
-      createdBy: 1,
-      visibility: 'Public',
-    },
-    {
-      id: 4,
-      description: 'Ei osanud teha',
-      category: 1,
-      createdBy: 1,
-      visibility: 'Public',
-    },
-    {
-      id: 5,
-      description: 'Ei tahtnud koristada',
-      category: 2,
-      createdBy: 1,
-      visibility: 'Public',
     },
   ],
 };

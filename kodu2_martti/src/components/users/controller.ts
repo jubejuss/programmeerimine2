@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import responseCodes from '../general/responseCodes';
 import usersService from './service';
+import { UpdateUser, NewUser } from './interfaces';
 
 const usersController = {
   getAllUsers: (req: Request, res: Response) => {
@@ -16,14 +17,19 @@ const usersController = {
         error: 'No valid id provided',
       });
     }
-    const user = usersService.getUserById(id);
-    if (!user) {
-      return res.status(responseCodes.badRequest).json({
-        error: `No user found with id: ${id}`,
+    if ((id === res.locals.user.id) || (res.locals.user.role === 'Admin')) {
+      const user = usersService.getUserById(id);
+      if (!user) {
+        return res.status(responseCodes.badRequest).json({
+          error: `No user found with id: ${id}`,
+        });
+      }
+      return res.status(responseCodes.ok).json({
+        user,
       });
     }
-    return res.status(responseCodes.ok).json({
-      user,
+    return res.status(responseCodes.notAuthorized).json({
+      error: 'You have no permission for this info',
     });
   },
   removeUser: (req: Request, res: Response) => {
@@ -42,8 +48,10 @@ const usersController = {
     usersService.removeUser(id);
     return res.status(responseCodes.noContent).json({});
   },
-  createUser: (req: Request, res: Response) => {
-    const { firstName, lastName } = req.body;
+  createUser: async (req: Request, res: Response) => {
+    const {
+      firstName, lastName, password, email,
+    } = req.body;
     if (!firstName) {
       return res.status(responseCodes.badRequest).json({
         error: 'First name is required',
@@ -54,7 +62,24 @@ const usersController = {
         error: 'Last name is required',
       });
     }
-    const id = usersService.createUser(firstName, lastName);
+    if (!email) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'Email is required',
+      });
+    }
+    if (!password) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'Password is required',
+      });
+    }
+    const newUser: NewUser = {
+      firstName,
+      lastName,
+      email,
+      password,
+      role: 'User',
+    };
+    const id = await usersService.createUser(newUser);
     return res.status(responseCodes.created).json({
       id,
     });
@@ -78,7 +103,12 @@ const usersController = {
         error: `No user found with id: ${id}`,
       });
     }
-    usersService.updateUser({ id, firstName, lastName });
+    const updateUser: UpdateUser = {
+      id,
+      firstName,
+      lastName,
+    };
+    usersService.updateUser(updateUser);
     return res.status(responseCodes.noContent).json({});
   },
 };
