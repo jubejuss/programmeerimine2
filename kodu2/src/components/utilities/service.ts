@@ -1,5 +1,5 @@
 import db from '../../db';
-import { Utility, UpdateUtility, NewUtility } from './interfaces';
+import { Utility } from './interfaces';
 
 const utilitiesService = {
   getAllUtilities: (): Utility[] => {
@@ -8,27 +8,45 @@ const utilitiesService = {
   },
 
   getUtilityById: (id: number): Utility | undefined => {
-    const utility = db.utilities.find((element) => element.id === id);
-    return utility;
+    const Utility = db.utilities.find((element) => element.id === id);
+    return Utility;
   },
   removeUtility: (id: number): boolean => {
     const index = db.utilities.findIndex((element) => element.id === id);
     db.utilities.splice(index, 1);
     return true;
   },
-  createUtility: async (newUtility: NewUtility) => {
-    const id = db.users.length + 1;
+  createUtility: (name: string, email: string, phone: number, IBAN: string) => {
+    const id = db.utilities.length + 1;
     db.utilities.push({
       id,
-      ...newUtility,
+      name,
+      email,
+      phone,
+      IBAN,
     });
     return id;
   },
-  updateUtility: (utility: UpdateUtility): boolean => {
-    const { id, name } = utility;
+  updateUtility: (data: {
+    id: number;
+    name: string;
+    email: string;
+    phone: number;
+    IBAN: string;
+  }): boolean => {
+    const { id, name, email, phone, IBAN } = data;
     const index = db.utilities.findIndex((element) => element.id === id);
     if (name) {
       db.utilities[index].name = name;
+    }
+    if (email) {
+      db.utilities[index].email = email;
+    }
+    if (phone) {
+      db.utilities[index].phone = phone;
+    }
+    if (IBAN) {
+      db.utilities[index].IBAN = IBAN;
     }
     return true;
   },

@@ -16,19 +16,14 @@ const utilitiesController = {
         error: 'No valid id provided',
       });
     }
-    if (id === res.locals.utility.id || res.locals.utility.role === 'Admin') {
-      const utility = utilitiesService.getUtilityById(id);
-      if (!utility) {
-        return res.status(responseCodes.badRequest).json({
-          error: `No utility found with id: ${id}`,
-        });
-      }
-      return res.status(responseCodes.ok).json({
-        utility,
+    const utility = utilitiesService.getUtilityById(id);
+    if (!utility) {
+      return res.status(responseCodes.badRequest).json({
+        error: `No utlility found with id: ${id}`,
       });
     }
-    return res.status(responseCodes.notAuthorized).json({
-      error: 'You have no permission for this info',
+    return res.status(responseCodes.ok).json({
+      utility,
     });
   },
   removeUtility: (req: Request, res: Response) => {
@@ -38,13 +33,62 @@ const utilitiesController = {
         error: 'No valid id provided',
       });
     }
-    const utility = utilitiesService.getUtilityById(id);
-    if (!utility) {
+    const utlility = utilitiesService.getUtilityById(id);
+    if (!utlility) {
       return res.status(responseCodes.badRequest).json({
         message: `Utility not found with id: ${id}`,
       });
     }
     utilitiesService.removeUtility(id);
+    return res.status(responseCodes.noContent).json({});
+  },
+  createUtility: (req: Request, res: Response) => {
+    const { name, email, phone, IBAN } = req.body;
+    if (!name) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'Name is required',
+      });
+    }
+    if (!email) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'Email is required',
+      });
+    }
+    if (!phone) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'Phone is required',
+      });
+    }
+    if (!IBAN) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'IBAN is required',
+      });
+    }
+    const id = utilitiesService.createUtility(name, email, phone, IBAN);
+    return res.status(responseCodes.created).json({
+      id,
+    });
+  },
+  updateUtility: (req: Request, res: Response) => {
+    const id: number = parseInt(req.params.id, 10);
+    const { name, email, phone, IBAN } = req.body;
+    if (!id) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'No valid id provided',
+      });
+    }
+    if (!name) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'Nothing to update',
+      });
+    }
+    const utility = utilitiesService.getUtilityById(id);
+    if (!utility) {
+      return res.status(responseCodes.badRequest).json({
+        error: `No utlility found with id: ${id}`,
+      });
+    }
+    utilitiesService.updateUtility({ id, name, email, phone, IBAN });
     return res.status(responseCodes.noContent).json({});
   },
 };

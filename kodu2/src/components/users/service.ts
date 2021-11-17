@@ -1,5 +1,5 @@
 import db from '../../db';
-import { User, UpdateUser, NewUser } from './interfaces';
+import { User } from './interfaces';
 
 const usersService = {
   getAllUsers: (): User[] => {
@@ -24,16 +24,25 @@ const usersService = {
     db.users.splice(index, 1);
     return true;
   },
-  createUser: async (newUser: NewUser) => {
+  createUser: (firstName: string, lastName: string, apartment: number, email: string, phone: number, IBAN: string) => {
     const id = db.users.length + 1;
     db.users.push({
       id,
-      ...newUser,
+      apartment,
+      firstName,
+      lastName,
+      email,
+      phone,
+      IBAN,
     });
     return id;
   },
-  updateUser: (user: UpdateUser): boolean => {
-    const { id, firstName, lastName } = user;
+  updateUser: (data: {
+    id: number;
+    firstName?: string;
+    lastName?: string;
+  }): boolean => {
+    const { id, firstName, lastName } = data;
     const index = db.users.findIndex((element) => element.id === id);
     if (firstName) {
       db.users[index].firstName = firstName;

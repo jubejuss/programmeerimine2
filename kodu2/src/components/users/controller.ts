@@ -16,19 +16,14 @@ const usersController = {
         error: 'No valid id provided',
       });
     }
-    if (id === res.locals.user.id || res.locals.user.role === 'Admin') {
-      const user = usersService.getUserById(id);
-      if (!user) {
-        return res.status(responseCodes.badRequest).json({
-          error: `No user found with id: ${id}`,
-        });
-      }
-      return res.status(responseCodes.ok).json({
-        user,
+    const user = usersService.getUserById(id);
+    if (!user) {
+      return res.status(responseCodes.badRequest).json({
+        error: `No user found with id: ${id}`,
       });
     }
-    return res.status(responseCodes.notAuthorized).json({
-      error: 'You have no permission for this info',
+    return res.status(responseCodes.ok).json({
+      user,
     });
   },
   removeUser: (req: Request, res: Response) => {
@@ -45,6 +40,65 @@ const usersController = {
       });
     }
     usersService.removeUser(id);
+    return res.status(responseCodes.noContent).json({});
+  },
+  createUser: (req: Request, res: Response) => {
+    const { apartment, firstName, lastName, email, phone, IBAN } = req.body;
+    if (!firstName) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'First name is required',
+      });
+    }
+    if (!lastName) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'Last name is required',
+      });
+    }
+    if (!apartment) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'Apartment is required',
+      });
+    }
+    if (!email) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'Email is required',
+      });
+    }
+    if (!phone) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'Phone is required',
+      });
+    }
+    if (!IBAN) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'IBAN is required',
+      });
+    }
+    const id = usersService.createUser(apartment, firstName, lastName, email, phone, IBAN);
+    return res.status(responseCodes.created).json({
+      id,
+    });
+  },
+  updateUser: (req: Request, res: Response) => {
+    const id: number = parseInt(req.params.id, 10);
+    const { firstName, lastName } = req.body;
+    if (!id) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'No valid id provided',
+      });
+    }
+    if (!firstName && !lastName) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'Nothing to update',
+      });
+    }
+    const user = usersService.getUserById(id);
+    if (!user) {
+      return res.status(responseCodes.badRequest).json({
+        error: `No user found with id: ${id}`,
+      });
+    }
+    usersService.updateUser({ id, firstName, lastName });
     return res.status(responseCodes.noContent).json({});
   },
 };

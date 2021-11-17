@@ -1,14 +1,9 @@
-interface NewUtility {
-  name: string;
-}
-
-interface Utility extends NewUtility {
-  id: number;
-}
-
-interface UpdateUtility {
+interface Utility {
   id: number;
   name: string;
+  email: string;
+  phone: number;
+  IBAN: string;
 }
 
-export { Utility, UpdateUtility, NewUtility };
+export { Utility };
