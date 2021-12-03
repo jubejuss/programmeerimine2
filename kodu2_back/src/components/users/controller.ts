@@ -74,7 +74,14 @@ const usersController = {
         error: 'IBAN is required',
       });
     }
-    const id = usersService.createUser(apartment, firstName, lastName, email, phone, IBAN);
+    const id = usersService.createUser(
+      apartment,
+      firstName,
+      lastName,
+      email,
+      phone,
+      IBAN
+    );
     return res.status(responseCodes.created).json({
       id,
     });

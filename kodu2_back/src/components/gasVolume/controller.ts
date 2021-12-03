@@ -48,7 +48,13 @@ const gasVolumesController = {
         error: 'Amount is required',
       });
     }
-    const id = gasVolumesService.createVolume(utilityId, pricePerM, year, month, amount);
+    const id = gasVolumesService.createVolume(
+      utilityId,
+      pricePerM,
+      year,
+      month,
+      amount
+    );
     return res.status(responseCodes.created).json({
       id,
     });
@@ -72,7 +78,14 @@ const gasVolumesController = {
         error: `No utlility found with id: ${id}`,
       });
     }
-    gasVolumesService.updateVolume({ id, utilityId, pricePerM, year, month, amount });
+    gasVolumesService.updateVolume({
+      id,
+      utilityId,
+      pricePerM,
+      year,
+      month,
+      amount,
+    });
     return res.status(responseCodes.noContent).json({});
   },
 };

@@ -24,7 +24,14 @@ const usersService = {
     db.users.splice(index, 1);
     return true;
   },
-  createUser: (firstName: string, lastName: string, apartment: number, email: string, phone: number, IBAN: string) => {
+  createUser: (
+    firstName: string,
+    lastName: string,
+    apartment: number,
+    email: string,
+    phone: number,
+    IBAN: string
+  ) => {
     const id = db.users.length + 1;
     db.users.push({
       id,
